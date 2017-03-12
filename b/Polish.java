@@ -29,7 +29,7 @@ public class Polish
 		else if (str.charAt(i) == '-') {
 			operStack += '-';
 		}
-		else if (str.charAt(i) == '*') {
+		else if (str.charAt(i) == 'x') {
 			operStack += '*';
 		}
 		else if (str.charAt(i) == '/') {
@@ -39,8 +39,8 @@ public class Polish
 			digitStack += strArr.charAt(i);
 		}
 	}
-	int operIteratorCount = 0;
-	String out = "";
+	int operIteratorCount = 0, digitIteratorCount = 0;
+	int out = 0;
 	while (operIteratorCount < operStack.length()) {
 		if (operStack.charAt(digitStack.charAt(operIteratorCount)) == '+') {
 			operIteratorCount++;
@@ -54,57 +54,10 @@ public class Polish
 		if (operStack.charAt(digitStack.charAt(operIteratorCount)) == '/') {
 			operIteratorCount++;
 		}
+	}
 	while (digitIteratorCount < operStack.length()) {
-			out += digitStack.charAt(operDigitCount) / digitStack.charAt(operDigitCount+1);
-			operDigitCount++;
+			out += digitStack.charAt(digitStack.length() - 2 - digitIteratorCount) / digitStack.charAt(digitStack.length() - 1 - digitIteratorCount);
+			digitIteratorCount++;
 		}
 	}
-	int numVals = n;
-	while (numVals > 0) {
-	    String tmp = scan.next();
-	    if (1 <= tmp.charAt(numVals) && tmp.charAt(numVals) <= 9) {
-		s += tmp;
-		numVals--;
-	    }
-	    else {
-		r
-	    }
-	    
-	}
-	numVals = n - 1;
-	int value = (int)s.charAt(n-1);
-	value -=48;
-	numVals--;
-	int i = numVals;
-	while(i > 0) {
-	    int operand = s.charAt(i) - 48;
-	    i--;
-	    char operator = s.charAt(i);
-	    i--;
-	    // System.out.println(operator + " operator");
-	    // System.out.println(operand + " operand");
-	    if (operator == '+') {
-		value += operand;
-		// System.out.println("plus");
-	    }
-	    else if (operator == 'x' || operator == '*') {
-		value *= operand;
-		// System.out.println("times");
-
-	    }
-	    else if (operator == '/') {
-		value /= operand;
-		// System.out.println("div");
-
-	    }
-	    else if (operator == '-') {
-		value -= operand;
-		// System.out.println("-");
-
-	    }
-	}
-
-	System.out.println(value);
-	
-    }
 }
